@@ -14,8 +14,8 @@
         }
         else{
             echo'<p>Mail-Adresse ist: ',$_POST['email'],' </p>';
-            
         }
+    echo'<p>Ihre Nachricht:<br>'.nl2br($_POST['memo'],false).'</p>';
 
     echo '<pre>',print_r($_POST),'</pre';
 

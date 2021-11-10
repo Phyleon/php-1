@@ -17,10 +17,10 @@
         Datum: <input type="date" name="datum"></p>
 
         <p>Farben:<br>
-            <input type="checkbox" name="gelb"> gelb
-            <input type="checkbox" name="blau"> blau
-            <input type="checkbox" name="gruen"> grün
-            <input type="checkbox" name="rot"> rot</p>
+            <input type="checkbox" name="farben[]" value="gelb"> gelb
+            <input type="checkbox" name="farben[]" value="blau"> blau
+            <input type="checkbox" name="farben[]" value="gruen"> grün
+            <input type="checkbox" name="farben[]" value="rot"> rot</p>
 
         <p>Ampel:<br>
             <input type="radio" name="ampel" value="rot"> rot
@@ -60,7 +60,12 @@
         </p>
 
         <p>Nachricht<br>
-            <textarea name="memo"></textarea>
+            <textarea name="memo">
+Das ist vorbelegter Text.
+
+und dasd geht auch mit Zeilenumbruch
+
+            </textarea>
         </p>
 
         <p><input type="submit" value="Abschicken" name="senden"></p>
