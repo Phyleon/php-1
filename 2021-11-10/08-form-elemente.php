@@ -9,6 +9,14 @@
 <body>
     <?php 
     if(isset($_POST['senden'])){
+        if(empty(trim($_POST['email']))){
+            echo'<p>Mail ist leer!</p>';
+        }
+        else{
+            echo'<p>Mail-Adresse ist: ',$_POST['email'],' </p>';
+            
+        }
+
     echo '<pre>',print_r($_POST),'</pre';
 
     }else{
