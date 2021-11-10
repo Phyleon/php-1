@@ -7,7 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <?php echo '<pre>',print_r($_POST),'</pre' ?>
+    <?php 
+    if(isset($_POST['senden'])){
+    echo '<pre>',print_r($_POST),'</pre';
+
+    }else{
+        echo'<p>Diese seite wurde nicht durch das Formular aufgerufen. Bitte rufen sie <a href="08-form-elemente.html">Formular</a> auf</p>';
+
+    }
+    
+     ?>
     
 </body>
 </html>
