@@ -25,7 +25,7 @@
     ?>
     <h1>Bewerbung, Newsletter oder Infomaterial</h1>
     <p>Bitte nennen Sie uns Ihr Anliegen:</p>
-    <form action="04-uebungs110.php" method="post">
+    <form action="<?php echo $_SERVER['PHP_SELF'] ?>"  method="post">
     <p>Anrede:
         <input type="radio" name="anrede" value="Herr" <?php echo $herr; ?> >Herr
         <input type="radio" name="anrede" value="Frau" <?php echo $frau; ?> >Frau
@@ -46,7 +46,7 @@
         if (isset($_POST['anrede'])&&!empty(trim($_POST['vn']))&&!empty(trim($_POST['nn']))&&!empty(trim($_POST['email']))) {
           echo'<p>Herzlichen Dank, ',
           $_POST['anrede'],' ',$_POST['nn'],' fuer ihre ',
-          
+
           $_POST['senden']=='bei Ihnen bewerben'?'Bewerbungsanfrage. Unsere Personalabteilung wird':'',
           $_POST['senden']=='Newsletter abonnieren'?'Anfrage unseres Newsletters. Sie werden zukuenftig':'',
           $_POST['senden']=='Infomaterial anfordern'?'Anfrage nach Infomaterial. Sie bekommen direkt':'',
