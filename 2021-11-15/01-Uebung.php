@@ -25,7 +25,7 @@
     $info='mobil:01783260248';
     echo $info.'</p>';
     ?> -->
-    <!-- <h1>taschenrechner</h1>
+    <h1>taschenrechner</h1>
     <?php 
     $a1='';
     $a2='';
@@ -44,7 +44,41 @@
     <p>Zahl 2<input type="text" name="a2" value="<?php echo $a2; ?>"></p>
     <p>Operator<input type="text" name="op" value="<?php echo $op; ?>"></p>
     <input type="submit" value="Absenden" name="senden"></input>
-    </form> -->
+    </form>
+    <?php 
+    
+    if (isset($_POST['senden'])) {
+        if (!empty(trim($_POST['a1']))&&!empty(trim($_POST['a2']))&&!empty(trim($_POST['op']))){
+            $ops=['+','-','*','/'];
+            if (in_array($op,$ops)){
+                echo'<p?>Das Ergebnis ';
+                switch ($op){
+                    case '+':
+                        echo'der Addition lautet: '.$a1+$a2;
+                        break;      
+                    case '-':
+                        echo'der Subtraktion lautet: '.$a1-$a2;
+                        break;      
+                    case '*':
+                        echo'der Multiplikation lautet: '.$a1*$a2;
+                        break;      
+                    case '/':
+                        echo'der Division lautet: '.$a1/$a2;
+                        break;      
+                }
+                echo'</p>';
+                 
+                    
+            }else{
+                echo'<p>Bitte fuer das Feld Operator + - * / eingeben</p>';
+            }
+            
+            
+
+        }else{echo'<p>Bitte alle Felder ausfuellen</p>';}
+    }
+    
+    ?>
 
     <!-- <h1>Kreisberechnungen</h1>
     <?php 

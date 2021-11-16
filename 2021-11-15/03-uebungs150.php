@@ -57,6 +57,19 @@
     if (!$tkopf) {
         fwrite($fh, "Name;Strasse;Ort;Frage1;Frage2;Frage3;Text\r\n");
     }
+    
+    
+    foreach ($_POST as $key => $value) {
+        if (empty(trim($value))) {
+            $_POST[$key]='keine Angabe';
+        }
+    }
+    for ($i=1; $i < 4; $i++) { 
+       if (!isset($_POST['f'.$i])) {
+          $_POST['f'.$i]='keine Angabe'; 
+       }
+    }
+    
     $name = $_POST['name'];
     $strasse = $_POST['strasse'];
     $ort = $_POST['ort'];
