@@ -127,11 +127,19 @@
     }
     echo'Anzahl Bloecke fuer 1000 stueck: '. $wieviel
     ?> -->
-    <?php 
+    <!-- <?php 
    
     function teppich($d,$mat){
+        $mats=['wolle'=>50,'seide'=>60];
+        
+        $PI = pi();
+        return (int)($d*$d*$PI/4*$mats[$mat]);
 
-    } ?>
+    } 
+    echo'Frau Mueller wolle, 1.5 durchmesser->Preis: '. teppich(1.5,'wolle').'<br>';
+    echo'Herr Meyer seide, 2 durchmesser->Preis: '. teppich(2,'seide');
+    ?> -->
+    
 
 
 </body>
