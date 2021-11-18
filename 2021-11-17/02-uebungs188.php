@@ -26,7 +26,9 @@ echo '</p>';
 
 echo'<h3>3.</h3>';
 echo '<p>';
-$stamp=getdate();
+$st = strtotime("+4 day");
+$stamp=getdate($st);
+
 switch ($stamp['wday']) {
     case '01':
         echo $stamp['weekday'].' ist ein doofer Tag';
@@ -46,8 +48,8 @@ switch ($stamp['wday']) {
     case '06':
         echo $stamp['weekday'].' ist der beste Tag';
         break;
-    case '07':
-        echo $stamp['weekday'].' ist der beste Tag';
+    case '00':
+        echo $stamp['weekday'].' ist ein  toller Tag';
         break;
     
     default:
