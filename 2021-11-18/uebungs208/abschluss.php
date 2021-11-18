@@ -9,20 +9,22 @@ get_header( ...$args );
 if(isset($_POST['absenden'])):
 
     foreach ($_POST as $key => $value) {
-        if (!empty(trim($value)) ){
+        if (!empty(trim($value))&&$key!=='absenden' ){
 
             $_SESSION[$key]=$value;
-        }
+        }}
 echo '<p class="lead">';
 echo'Das sind die in der Session gesammelte Daten';
 echo '</p>';
         foreach ($_SESSION as $key => $value) {
-            if ( $key!=='names'){
+            if ( array_key_exists($key,$_SESSION['names'])){
               echo''.$_SESSION['names'][$key].': '.$value.($value>1?' Glaesser':' Glas').'<br>';  
             }
-           
+            if ( array_key_exists($key,$_POST)){
+                echo'test';
+            }
         } 
-}
+
 
 else:
 ?>
