@@ -13,8 +13,6 @@ foreach ($_POST as $key => $value) {
         $_SESSION[$key]=(int)$value;
     }
 }
-echo '<pre>', var_dump( $_SESSION ), '</pre>';
-echo '<pre>', var_dump( $_POST ), '</pre>';
 ?>
 <p class="lead">Sie haben folgende Mengen bestellt:</p>
 <p>
@@ -22,13 +20,13 @@ echo '<pre>', var_dump( $_POST ), '</pre>';
     
      foreach ($_SESSION as $key => $value) {
     if ($key!=='names'){
-      echo''.$_SESSION['names'][$key].': '.$value.($value>1?' Glaesser':' Glas').'<br>';  
+      echo''.$_SESSION['names'][$key].': '.$value.($value>1?' Glaeser':' Glas').'<br>';  
     }
    
 }  ?>
 </p>
 <p><i>Die Session-ID lautet: <?php echo session_id(); ?></i></p>
-<p><a href="abschluss.php">Weiter zur Eingabe persoenlicher Daten</a> und dem Abschluss der Bestellung</p>
+<p><a href="abschluss.php">Weiter zur Eingabe persoenlicher Daten</a> und zu dem Abschluss der Bestellung</p>
 <?php 
 }else{
     echo '<p>';

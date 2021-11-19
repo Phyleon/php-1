@@ -3,7 +3,7 @@ session_start();
 require_once( '../../includes/functions.inc.php' );
 // get_header( string $title, string/array $css=NULL, bool $bootstrap=false, string $header=NULL, array $nav=NULL, bool $fluid=false )
 $args = array(
-    "dreamy Sweets",null,true,'The sweetest Dreams awake',['Dreamy Sweets',['Start'=>'index.php','Schokolade'=>'schokolade.php','Pralinen'=>'pralinen.php','Warenkorb'=>'warenkorb.php']]
+    'dreamy sweets',null,true,'The sweetest Dreams awake',['<img src="rs-logo-109x56.png" alt="logo">',['Start'=>'index.php','Schokolade'=>'schokolade.php','Pralinen'=>'pralinen.php','Warenkorb'=>'warenkorb.php']]
 );
 get_header( ...$args );
 ?>

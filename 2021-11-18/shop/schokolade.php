@@ -20,10 +20,17 @@ get_header( ...$args );
 
         <?php foreach ($array_schoko as $key => $value):?>
             <?php $menge=isset($_SESSION[$key])?$_SESSION[$key]:0; ?>
+            <?php 
+            $focus='';
+            
+            if (isset($_GET['edit'])&&$key ===$_GET['edit']) {
+                $focus='autofocus';
+            }
+             ?>
             <tr>
                 <td><?php echo $key; ?></td>
                 <td><?php echo $value; ?></td>
-                <td><input type="number" size="5" value="<?php echo $menge; ?>" name="<?php echo $key; ?>"></td>
+                <td><input type="number" <?php echo $focus; ?> size="5" value="<?php echo $menge; ?>" name="<?php echo $key; ?>"></td>
                 <td>Tafel 80g</td>
             </tr>
         <?php endforeach; ?>
@@ -35,4 +42,10 @@ get_header( ...$args );
         </tr>
     </table>
 </form>
+<script>
+    const elements = document.querySelectorAll("input");
+    for (let i=0; i<elements.length;i++){
+        elements[i].addEventListener("focus", function(){this.select();});
+    }
+</script>
 <?php get_footer(); ?>
