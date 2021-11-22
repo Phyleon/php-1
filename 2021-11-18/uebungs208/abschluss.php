@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once( '../../includes/functions.inc.php' );
+$database = 'homepage';
+require_once( '../../includes/db-connect.inc.php' );
 // get_header( string $title, string/array $css=NULL, bool $bootstrap=false, string $header=NULL, array $nav=NULL, bool $fluid=false )
 $args = array(
     'Uebung Seite 208',null,true
@@ -24,6 +26,33 @@ if(isset($_POST['absenden'])):
             echo"$key: $value<br>";
         }
     } 
+    $sql1='INSERT INTO `bestellungen`(';
+     //    .'`zellenname`,'.
+    $sql2='`id`)values(';
+    //'"'.$_POST['username'].'",
+    $sql3='NULL)';
+    foreach ($_SESSION as $key => $value) {
+        if ( array_key_exists($key,$_SESSION['names'])){
+            $sql1.='`'.$_SESSION['names'][$key].'`, ';
+            $sql2.='"'.$value.'", ';
+             
+        }
+        if ( array_key_exists($key,$_POST)){
+            $sql1.='`'.$key.'`, ';
+            $sql2.='"'.$value.'", ';
+
+        }
+    } 
+    //INSERT INTO `bestellungen` (`vorname`, `nachname`, `wohnort`, `mailadresse`, `Nuss-Nougat Creme`, `Peanutbutter`, `Cashewcreme`, `Chocolatcreme Noir`, `id`) VALUES ('vorname', 'nachname', 'ort', 'mail', '1', '2', '3', '4', NULL);
+   $sql= $sql1.$sql2.$sql3;
+    if($result=mysqli_query($db,$sql)){
+            
+        echo'<p class="lead">success</p>';
+    }else{
+        echo get_db_error($db,$sql);
+    }
+    mysqli_close($db);
+
           $_SESSION = [];
         session_destroy();
             echo '<p>';
