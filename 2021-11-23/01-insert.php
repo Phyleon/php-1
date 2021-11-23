@@ -12,14 +12,22 @@ if(!empty($_POST)){
     $gerte_name = mysqli_real_escape_string($db,$_POST['gerte_name']);
     $gerte_kateg_id_ref =mysqli_real_escape_string($db, $_POST['gerte_kateg_id_ref']);
     $gerte_beschreibung = mysqli_real_escape_string($db,$_POST['gerte_beschreibung']);
-    $sql = "INSERT INTO `tbl_gerichte`(gerte_name,gerte_beschreibung,gerte_kateg_id_ref)VAlUES(\"$gerte_name\",\"$gerte_beschreibung\",\"$gerte_kateg_id_ref\")";
-    $result = mysqli_query($db,$sql);
-    if (false===$result) {
+    $sql = "INSERT INTO `tbl_gerichte`(gerte_name,gerte_beschreibung,gerte_kateg_id_ref)VAlUES(?,?,?)";
+    $stmt = mysqli_prepare($db,$sql);
+
+    if (false===$stmt) {
         echo get_db_error($db,$sql);
     }else{
+        // WErte und Datentypen an die platzhalter binden
+        mysqli_stmt_bind_param($stmt,'ssi',$gerte_name,$gerte_beschreibung,$gerte_kateg_id_ref);
+        // ausfuehrung
+        mysqli_stmt_execute($stmt);
+        // liefert die zuletzt hinzugefuegte id
+        $id = mysqli_stmt_insert_id($stmt);
         echo '<p class="alert alert-success">';
         echo mysqli_affected_rows($db);
-        echo ' Datensaetze wurden hinzugefuegt.</p>';
+        echo ' Datensaetze wurden hinzugefuegt.<br>Hinzugefuegte ID:'.$id.'</p>';
+        mysqli_stmt_close($stmt);
     }
 }
 
@@ -53,4 +61,6 @@ if(!empty($_POST)){
           <p><button class="btn btn-outline-dark" type="submit">speichern</button></p>
       </p>
   </form>  
-<?php get_footer(); ?>
+<?php 
+mysqli_close($db);
+get_footer(); ?>
