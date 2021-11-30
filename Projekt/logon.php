@@ -37,28 +37,29 @@ if (!empty($_POST)&&isset($_POST['register'])) {
     $autor_nachname =$_POST['autor_nachname'];
     $sql= "INSERT INTO `tbl_autoren`(`autor_id`, `autor_vorname`, `autor_nachname`, `autor_email`, `autor_passwort`) VALUES (NULL,?,?,?,?)";
     $stmt=mysqli_prepare($db,$sql);
-    if (false===$stmt){
-        echo get_db_error($db,$sql);
-    }else{
-        mysqli_stmt_bind_param($stmt,'ssss',$autor_vorname,$autor_nachname,$autor_email,$autor_passwort);
-        mysqli_stmt_execute($stmt);
-        printf('<p class="altert alerts-success">Ihre Regisitrierung war erfolgreich!<br>Anzahl der hinzu gefuegten Datensaetze: %d</p>',mysqli_affected_rows($db));
-        mysqli_stmt_close($stmt);
+    mysqli_stmt_bind_param($stmt,'ssss',$autor_vorname,$autor_nachname,$autor_email,$autor_passwort);
+    mysqli_stmt_execute($stmt);
+    if(mysqli_affected_rows($db)===1){
+        printf('<p class="altert alert-success">Ihre Regisitrierung war erfolgreich!</p>');
     }
+    if(mysqli_affected_rows($db)===-1){
+        echo '<p class="altert alert-danger">Ihre Regisitrierung war nich moeglich, email adresse berteits in Verwendung.<br>Bitte loggen sie sich mit der Email adresse ein oder legen sie sich ein neues Konto mit einer anderen Email Adresse an!</p>';
+    }
+    mysqli_stmt_close($stmt);
+    
 }
 if (!empty($_POST)&&isset($_POST['login'])) {
 
     $autor_email = $_POST['autor_email'];
     $autor_passwort =$_POST['autor_passwort'];
 
-    $sql = "SELECT `autor_vorname`, `autor_nachname`, `autor_email`, `autor_passwort` FROM `tbl_autoren` WHERE `autor_email` = ?";
+    $sql = "SELECT `autor_id`,`autor_vorname`, `autor_nachname`, `autor_email`, `autor_passwort` FROM `tbl_autoren` WHERE `autor_email` = ?";
     $stmt= mysqli_prepare($db,$sql);
-    if (false===$stmt){get_db_error($db,$sql);}
-    else{
+   
         mysqli_stmt_bind_param($stmt,'s',$autor_email);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
-        mysqli_stmt_bind_result($stmt,$db_vorname,$db_nachname,$db_email,$db_passwort);
+        mysqli_stmt_bind_result($stmt,$db_autor_id,$db_vorname,$db_nachname,$db_email,$db_passwort);
         mysqli_stmt_fetch($stmt);
         mysqli_stmt_close($stmt);
         //Pruefe ob passwort uebereinstimmt:
@@ -66,6 +67,7 @@ if (!empty($_POST)&&isset($_POST['login'])) {
             $_SESSION['loginsuccess']=true;
             $_SESSION['autor_vorname']=$db_vorname;
             $_SESSION['autor_nachname']=$db_nachname;
+            $_SESSION['autor_id']=$db_autor_id;
             echo'<p class="alert alert-success">Du bist eingeloggt</p>';
             header("Refresh:1; url=index.php");
         }
@@ -74,7 +76,7 @@ if (!empty($_POST)&&isset($_POST['login'])) {
             echo'<p class="alert alert-danger">Du bist nicht eingeloggt</p>';
         
         }   
-    }
+    
 }
 
 ?>
